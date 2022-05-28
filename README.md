@@ -8,7 +8,7 @@
 
 ---
 
-> The _Elizabeth line_ will be added when I can find it in SVG format. The [new map](https://twitter.com/TfL/status/1527222586442227712/photo/1) has changed a lot, namely interchanges and the new Elizabeth line branch. It may be some time before the SVG [sources](#sources) I used originally will be updated. I have submitted an FOI request to TfL to hopefully get the new map sooner.
+> The new tube map will be used when the Elizabeth Line is fully open and the map is in its final form. The map update will take a lot of effort so I won't do it until it won't need to be done again for ages.
 
 ---
 
@@ -44,9 +44,9 @@ _(Some of the three-letter station codes were non-existent so I made them up. I 
   - [x] Make it prettier
   - [x] Fix font
   - [ ] Rough text match for station input.
-  - [ ] Visual handling of correct and incorrect input.
+  - [x] Visual handling of correct and incorrect input.
 - [x] Bus route data (X routes used out of X) (for now)
-- [ ] Login and User Profiles
+- [ ] Login and User Profiles (WIP)
   - [ ] Data saved in database, not LS; therefore syncing across devices
 - [ ] Stats
   - [ ] % of stations visited
@@ -62,9 +62,9 @@ _(Some of the three-letter station codes were non-existent so I made them up. I 
 | Version | Feature                           |
 | ------- | --------------------------------- |
 | 1.0.0   | Minimum Viable Product            |
-| 1.0.X   | Stats are better labelled         |
-| 1.X.0   | Bus routes displayed more clearly |
-| X.X.0   | Sharable PNG of map/stats         |
+| N.X.0   | Stats are better labelled         |
+| N.X.0   | Bus routes displayed more clearly |
+| N.X.0   | Sharable PNG of map/stats         |
 | 2.0.0   | User Login and info stored in DB  |
 | 3.0.0   | PWA                               |
 
@@ -72,7 +72,7 @@ _(Some of the three-letter station codes were non-existent so I made them up. I 
 
 ### Type faces
 
-To keep it open source, the station labels on the map are [`Hammersmith One`](https://fonts.google.com/specimen/Hammersmith+One)—a copyright friendly font alternative to the official [`Johnston`](<https://en.wikipedia.org/wiki/Johnston_(typeface)>).
+To keep it open source, the station labels on the map are [`Hammersmith One`](https://fonts.google.com/specimen/Hammersmith+One)—a copyright friendly font alternative to the official [`Johnston`](https://en.wikipedia.org/wiki/Johnston_(typeface)).
 
 ![Hammersmith One font sample](/README%20assets/hammersmith-one.png)
 
