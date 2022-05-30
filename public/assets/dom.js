@@ -121,6 +121,63 @@ document.getElementById('js-mapSwitch').addEventListener('click', () => {
 	}
 	loadMap(mapInst);
 });
+const signUpDialog = document.getElementById('js-signup');
+const loginDialog = document.getElementById('js-login');
+document.getElementById('js-user').addEventListener('click', () => {});
+document.getElementById('js-loginButton').addEventListener('click', () => {
+	signUpDialog.classList.remove('show');
+	if (loginDialog.classList.contains('show')) {
+		loginDialog.classList.remove('show');
+	} else {
+		loginDialog.classList.add('show');
+	}
+});
+document.getElementById('js-signUpButton').addEventListener('click', () => {
+	loginDialog.classList.remove('show');
+	if (signUpDialog.classList.contains('show')) {
+		signUpDialog.classList.remove('show');
+	} else {
+		signUpDialog.classList.add('show');
+	}
+});
+document.getElementById('js-signupForm').addEventListener('submit', (e) => {
+	e.preventDefault();
+	const name = e.target[0].value,
+		email = e.target[1].value,
+		user = e.target[2].value,
+		pass = e.target[3].value,
+		stations = usrData('get', 'stations'),
+		busses = usrData('get', 'bus');
+	const userData = postUser('register', user, pass, email, name, stations, busses);
+});
+document.getElementById('js-loginForm').addEventListener('submit', (e) => {
+	e.preventDefault();
+	const user = e.target[0].value,
+		pass = e.target[1].value;
+	postUser('login', user, pass);
+});
+function postUser(type, user, pass, email = '', name = '', stations = [], bus = []) {
+	const f = fetch(type, {
+		method: 'POST',
+		credentials: 'same-origin',
+		body: JSON.stringify({
+			username: user,
+			password: pass,
+			email: email,
+			name: name,
+			stations: stations,
+			bus: bus
+		}),
+		headers: {
+			'Content-type': 'application/json; charset=UTF-8'
+		}
+	})
+		.then((response) => response.text())
+		.then((data) => {
+			console.log(`[dom.ts | postUser] ${data}`);
+			return JSON.parse(data);
+		});
+}
 function newStation(input) {
 	if (stations[input] !== undefined) {
 		addStnsToMap(input);
@@ -161,6 +218,7 @@ const autoCompleteJS = new autoComplete({
 	data: {
 		src: [
 			'Abbey Road',
+			'Abbey Wood',
 			'Acton Central',
 			'Acton Mainline',
 			'Acton Town',
@@ -223,7 +281,7 @@ const autoCompleteJS = new autoComplete({
 			'Bush Hill Park',
 			'Bushey',
 			'Caledonian Road',
-			'Caledonian Road &amp; Barnsbury',
+			'Caledonian Road & Barnsbury',
 			'Cambridge Heath',
 			'Camden Road',
 			'Camden Town',
@@ -236,7 +294,7 @@ const autoCompleteJS = new autoComplete({
 			'Carpenders Park',
 			'Centrale',
 			'Chadwell Heath',
-			'Chalfont &amp; Latimer',
+			'Chalfont & Latimer',
 			'Chalk Farm',
 			'Chancery Lane',
 			'Charing Cross',
@@ -287,9 +345,9 @@ const autoCompleteJS = new autoComplete({
 			'Eastcote',
 			'Edgware',
 			'Edgware Road (Bakerloo line)',
-			'Edgware Road (District, Circle, H&amp;C lines)',
+			'Edgware Road (District, Circle, H&C lines)',
 			'Edmonton Green',
-			'Elephant &amp; Castle',
+			'Elephant & Castle',
 			'Elmers End',
 			'Elm Park',
 			'Elverson Road',
@@ -306,7 +364,7 @@ const autoCompleteJS = new autoComplete({
 			'Fieldway',
 			'Finchley Central',
 			'Finchley Road',
-			'Finchley Road &amp; Frognal',
+			'Finchley Road & Frognal',
 			'Finsbury Park',
 			'Forest Gate',
 			'Forest Hill',
@@ -333,7 +391,7 @@ const autoCompleteJS = new autoComplete({
 			'Hackney Wick',
 			'Haggerston',
 			'Hainault',
-			'Hammersmith (Circle, H&amp;C lines)',
+			'Hammersmith (Circle, H&C lines)',
 			'Hammersmith (District, Piccadilly lines)',
 			'Hampstead',
 			'Hampstead Heath',
@@ -343,11 +401,11 @@ const autoCompleteJS = new autoComplete({
 			'Harringay Green Lanes',
 			'Harrington Road',
 			'Harold Wood',
-			'Harrow &amp; Wealdstone',
+			'Harrow & Wealdstone',
 			'Harrow on the Hill',
 			'Hatch End',
 			'Hatton Cross',
-			'Hayes &amp; Harrlington',
+			'Hayes & Harrlington',
 			'Headstone Lane',
 			'Heathrow Terminal 4',
 			'Heathrow Terminal 5',
@@ -357,7 +415,7 @@ const autoCompleteJS = new autoComplete({
 			'Highams Park',
 			'High Barnet',
 			'High Street Kensington',
-			'Highbury &amp; Islington',
+			'Highbury & Islington',
 			'Highgate',
 			'Hillingdon',
 			'Holborn',
@@ -554,7 +612,7 @@ const autoCompleteJS = new autoComplete({
 			'Tooting Broadway',
 			'Tottenham Court Road',
 			'Tottenham Hale',
-			'Totteridge &amp; Whetstone',
+			'Totteridge & Whetstone',
 			'Tower Gateway',
 			'Tower Hill',
 			'Tufnell Park',
@@ -617,7 +675,8 @@ const autoCompleteJS = new autoComplete({
 			'Woodside',
 			'Woodside Park',
 			'Wood Street',
-			'Woolwich Arsenal'
+			'Woolwich Arsenal',
+			'Woolwich'
 		],
 		cache: true
 	},

@@ -12,7 +12,9 @@ function storageAvailable(type: any) {
 	try {
 		storage = window[type];
 		var x = '__storage_test__';
+		// @ts-ignore
 		storage.setItem(x, x);
+		// @ts-ignore
 		storage.removeItem(x);
 		return true;
 	} catch (e) {
@@ -143,6 +145,83 @@ document.getElementById('js-mapSwitch')!.addEventListener('click', () => {
 	}
 	loadMap(mapInst);
 });
+
+/* Dialogs */
+
+const signUpDialog = document.getElementById('js-signup')! as HTMLDivElement;
+const loginDialog = document.getElementById('js-login')! as HTMLDivElement;
+
+document.getElementById('js-user')!.addEventListener('click', () => {});
+
+document.getElementById('js-loginButton')!.addEventListener('click', () => {
+	signUpDialog.classList.remove('show');
+	if (loginDialog.classList.contains('show')) {
+		loginDialog.classList.remove('show');
+	} else {
+		loginDialog.classList.add('show');
+	}
+});
+
+document.getElementById('js-signUpButton')!.addEventListener('click', () => {
+	loginDialog.classList.remove('show');
+	if (signUpDialog.classList.contains('show')) {
+		signUpDialog.classList.remove('show');
+	} else {
+		signUpDialog.classList.add('show');
+	}
+});
+
+document.getElementById('js-signupForm')!.addEventListener('submit', (e) => {
+	e.preventDefault();
+	const name = e.target[0].value,
+		email = e.target[1].value,
+		user = e.target[2].value,
+		pass = e.target[3].value,
+		stations = usrData('get', 'stations'),
+		busses = usrData('get', 'bus');
+	const userData = postUser('register', user, pass, email, name, stations, busses);
+	// TODO: Do something with the returned data (i.e. populate user box etc...)
+	// TODO: Close box on success.
+});
+
+document.getElementById('js-loginForm')!.addEventListener('submit', (e) => {
+	e.preventDefault();
+	const user = e.target[0].value,
+		pass = e.target[1].value;
+	postUser('login', user, pass);
+	// TODO: Close box on success.
+});
+
+function postUser(
+	type: string,
+	user: string,
+	pass: string,
+	email: string = '',
+	name: string = '',
+	stations: Array<string> = [],
+	bus: Array<string> = []
+) {
+	const f = fetch(type, {
+		method: 'POST',
+		credentials: 'same-origin',
+		body: JSON.stringify({
+			username: user,
+			password: pass,
+			email: email,
+			name: name,
+			stations: stations,
+			bus: bus
+		}),
+		headers: {
+			'Content-type': 'application/json; charset=UTF-8'
+		}
+	})
+		.then((response) => response.text())
+		.then((data) => {
+			console.log(`[dom.ts | postUser] ${data}`);
+			return JSON.parse(data);
+		});
+}
 
 function newStation(input: string) {
 	if (stations[input] !== undefined) {

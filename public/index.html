@@ -63,11 +63,11 @@
             <i class="liz" id="js-mapSwitch"></i>
         </footer>
         <aside id="js-aside">
-            <div class="bubble" style="background-color: #7156A5; color: white; min-height: auto;">
-                <h4>Elizabeth line coming soon...</h4><br />
-                <p>Due to the many changes on the new Tube Map, integrating the new Elizabeth line will take a lot of work! I anticipate this being a task for when the line is fully opened and the map will face no further changes.</p><br />
-                <p>For now you can click the roundal to change between the current map and the new branch.</p><br />
-                <p>Feel free to contribute on <a href="https://www.github.com/PocketCoder/tubular" targe="_blank">Github.</a></p>
+            <div class="bubble" id="js-userBox">
+                <h4>Account</h4>
+                <a href="#" id="js-signUpButton">Sign Up</a> | <a href="#" id="js-loginButton">Log In</a>
+                <br />
+                <a href="#">Settings</a>
             </div>
             <div class="bubble" id="js-welcome">
                 <h4>Welcome!</h4>
@@ -77,6 +77,12 @@
                 <p>TfL let you export the last 8 weeks of journey data from their <a href="https://oyster.tfl.gov.uk" target="_blank">website.</a> Simply log in and click on the button to export your jouney history as a <u>CSV</u> file. If you don't have an account, but have an Oyster/contactless card you use for journeys, just sign up and follow the steps to link them.</p>
                 <br />
                 <p class="nb">N.B.: Syncing between this device and others is currently unavailable. All data is stored in the browser's <code>localStorage</code>. Support for accounts and cross-device syncing will come in the near future.</p>
+            </div>
+            <div class="bubble" style="background-color: #7156A5; color: white; min-height: auto;">
+                <h4>Elizabeth line coming soon...</h4><br />
+                <p>Due to the many changes on the new Tube Map, integrating the new Elizabeth line will take a lot of work! I anticipate this being a task for when the line is fully opened and the map will face no further changes.</p><br />
+                <p>For now you can click the roundal to change between the current map and the new branch.</p><br />
+                <p>Feel free to contribute on <a href="https://www.github.com/PocketCoder/tubular" targe="_blank">Github.</a></p>
             </div>
             <div class="bubble">
                 <h4>Upload CSV</h4>
@@ -111,5 +117,36 @@
                 <p>Help me fix it by reporting an <a href="https://github.com/PocketCoder/tubular/issues/new/choose" target="_blank">issue on GitHub</a>.</p>
             </div>
         </aside>
+        <!--Dialogs-->
+        <div class="dialog" id="js-signup">
+            <form id="js-signupForm">
+                <h4>Sign-up</h4>
+                <p>All of your existing data will be uploaded to your account, so you can see where you've been on any device.</p>
+                <label for="name">First name:</label>
+                <input name="name" type="text" />
+                <br />
+                <label for="email">Email:</label>
+                <input name="email" type="email" />
+                <br />
+                <label for="username">Username:</label>
+                <input name="username" type="text" />
+                <br />
+                <label for="password">Password:</label>
+                <input name="password" type="password" />
+                <br />
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+        <div class="dialog" id="js-login">
+            <form id="js-loginForm">
+                <label for="username">Username:</label>
+                <input name="username" type="text" />
+                <br />
+                <label for="password">Password:</label>
+                <input name="password" type="password" />
+                <br />
+                <button type="submit">Log in</button>
+            </form>
+        </div>
     </body>
 </html>
