@@ -1,0 +1,66 @@
+const bcrypt = require('bcryptjs'),
+	Q = require('q');
+
+// MongoDB connection information
+const mongodbUrl = `mongodb+srv://jake:${process.env.MONGOPASS}@user.3gpst.mongodb.net/?retryWrites=true&w=majority`;
+const MongoClient = require('mongodb').MongoClient;
+
+//used in local-signup strategy
+exports.localReg = function (username: string, password: string) {
+	let deferred = Q.defer();
+
+	MongoClient.connect(mongodbUrl, function (err: any, client: any) {
+		const collection = client.db('usersDB').collection('users');
+
+		//check if username is already assigned in our database
+		collection.findOne({username: username}).then(function (result: any) {
+			if (null != result) {
+				console.log('USERNAME ALREADY EXISTS:', result.username);
+				deferred.resolve(false); // username exists
+			} else {
+				let hash = bcrypt.hashSync(password, 8);
+				let user = {
+					username: username,
+					password: hash
+				};
+				console.log('CREATING USER:', username);
+				collection.insert(user).then(function () {
+					client.close();
+					deferred.resolve(user);
+				});
+			}
+		});
+	});
+	return deferred.promise;
+};
+
+//check if user exists
+//if user exists check if passwords match (use bcrypt.compareSync(password, hash); // true where 'hash' is password in DB)
+//if password matches take into website
+//if user doesn't exist or password doesn't match tell them it failed
+exports.localAuth = (username: string, password: string) => {
+	let deferred = Q.defer();
+	MongoClient.connect(mongodbUrl, function (err: any, client: any) {
+		const collection = client.db('usersDB').collection('users');
+		collection.findOne({username: username}).then((result: any) => {
+			if (null == result) {
+				console.log('USERNAME NOT FOUND:', username);
+				deferred.resolve(false);
+			} else {
+				let hash = result.password;
+
+				console.log('FOUND USER: ' + result.username);
+
+				if (bcrypt.compareSync(password, hash)) {
+					deferred.resolve(result);
+				} else {
+					console.log('AUTHENTICATION FAILED');
+					deferred.resolve(false);
+				}
+			}
+			client.close();
+		});
+	});
+
+	return deferred.promise;
+};

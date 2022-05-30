@@ -233,7 +233,8 @@ function updateStats(data: {[line: string]: number}) {
 		tram: 39
 	};
 	for (const l in totals) {
-		let percent: number = 0, visited: number;
+		let percent: number = 0,
+			visited: number;
 		if (data[l] === NaN) {
 			document.getElementById(`${l}`)!.setAttribute('value', '0');
 		} else {
@@ -322,7 +323,7 @@ function CSVtoArray(strData: string, strDelimiter = ',') {
 		if (strMatchedDelimiter.length && strMatchedDelimiter != strDelimiter) {
 			arrData.push([]);
 		}
-		
+
 		let strMatchedValue: any;
 		if (arrMatches[2]) {
 			strMatchedValue = arrMatches[2].replace(new RegExp('""', 'g'), '"');

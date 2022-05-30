@@ -1,16 +1,16 @@
 type LineObj = {
 	[line: string]: {
-		branch: Boolean,
-		line: string,
-		stations?: string[]
-		top?: string[][],
-		bottom?: string[][]
-	}
-}
+		branch: Boolean;
+		line: string;
+		stations?: string[];
+		top?: string[][];
+		bottom?: string[][];
+	};
+};
 
 type StationDict = {
-	[station: string]: string
-}
+	[station: string]: string;
+};
 
 const lines: LineObj = {
 	bakerloo: {
@@ -1143,5 +1143,5 @@ const stations: StationDict = {
 	'Woodside Park': 'WSP',
 	'Wood Street': 'WOS',
 	'Woolwich Arsenal': 'WOA',
-	'Woolwich': 'WOO'
+	Woolwich: 'WOO'
 };

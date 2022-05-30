@@ -1,5 +1,5 @@
 interface Window {
-	setItem(x:any, y:any): any;
+	setItem(x: any, y: any): any;
 	removeItem(x: any): any;
 }
 
@@ -140,7 +140,7 @@ document.getElementById('js-mapSwitch')!.addEventListener('click', () => {
 		icon.classList.add('tube');
 	} else {
 		icon.classList.remove('tube');
-		mapInst = 'tube'
+		mapInst = 'tube';
 		icon.classList.add('liz');
 	}
 	loadMap(mapInst);
@@ -150,8 +150,6 @@ document.getElementById('js-mapSwitch')!.addEventListener('click', () => {
 
 const signUpDialog = document.getElementById('js-signup')! as HTMLDivElement;
 const loginDialog = document.getElementById('js-login')! as HTMLDivElement;
-
-document.getElementById('js-user')!.addEventListener('click', () => {});
 
 document.getElementById('js-loginButton')!.addEventListener('click', () => {
 	signUpDialog.classList.remove('show');

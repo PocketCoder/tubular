@@ -123,7 +123,6 @@ document.getElementById('js-mapSwitch').addEventListener('click', () => {
 });
 const signUpDialog = document.getElementById('js-signup');
 const loginDialog = document.getElementById('js-login');
-document.getElementById('js-user').addEventListener('click', () => {});
 document.getElementById('js-loginButton').addEventListener('click', () => {
 	signUpDialog.classList.remove('show');
 	if (loginDialog.classList.contains('show')) {
